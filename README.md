@@ -28,6 +28,43 @@ ported from [linkev/PlayStation-3-XMB](https://github.com/linkev/PlayStation-3-X
 
 Details: [launcher/README.md → Wallpaper](launcher/README.md#wallpaper).
 
+## Not comfortable with the terminal? Let an AI do it
+
+You don't need to understand ADB, PowerShell or anything else in this README. An **AI coding agent**
+can do the whole setup for you. It's an assistant, such as [Claude Code](https://claude.com/claude-code),
+that runs on your computer and can read this project and type the commands itself. You talk to it in
+plain English, and it handles the technical part.
+
+**What you do (the AI can't touch your TV):**
+
+1. **Download this project.** On this page, click **Code → Download ZIP**, then unzip it.
+2. **Turn on Developer options on the TV.** Settings → System → About, then click *Android TV OS build*
+   7 times.
+3. **Turn on Wireless debugging.** Settings → System → Developer options → Wireless debugging → On.
+   Your TV and computer must be on the same Wi-Fi.
+4. **Open the AI agent in the unzipped folder.** For Claude Code on Windows 11: right-click inside the
+   folder, choose **Open in Terminal**, and type `claude`.
+5. **Tell it what you want.** For example:
+
+   > Read the README. I want to debloat my Google TV and install the Crossbar PS3 home screen.
+   > Walk me through it step by step. Do a dry run first and explain what will change before you
+   > change anything.
+
+6. **Read it what the TV shows.** When it asks, open Wireless debugging → **Pair device with pairing
+   code** on the TV, and type the 6-digit code and the `IP:port` into the chat.
+
+**What the AI does:** it downloads ADB and the build tools, pairs with your TV, runs a dry run and
+explains it, hides the bloat, builds and installs Crossbar, grants its permissions, and sets up the
+screensaver. You'll still need to turn on **Crossbar Home button** yourself under Settings →
+Accessibility on the TV.
+
+**Good to know:**
+
+- The agent asks before it runs commands. You can read each one and say no.
+- Nothing here is permanent. If you don't like something, ask the AI to "restore everything" or
+  "switch back to the normal Google TV home screen".
+- The debloat works from Windows, macOS or Linux. Building Crossbar needs Windows for now.
+
 ## Contents
 
 - [What gets hidden](#what-gets-hidden)
