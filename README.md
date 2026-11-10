@@ -12,6 +12,22 @@ Make a Google TV yours, from your computer, with nothing to root. Two parts, usa
 Tested on the **Google TV Streamer 4K** (Android 14). Every one of its 140 packages has a verdict in
 [docs/app-inventory.md](docs/app-inventory.md).
 
+### The wallpaper
+
+Crossbar's background is the PS3's flowing wave, recreated natively in OpenGL ES 3 at 60 fps and
+ported from [linkev/PlayStation-3-XMB](https://github.com/linkev/PlayStation-3-XMB) (MIT).
+
+- **Reacts to music.** Play a song in any app and the wave speeds up, its glow breathes with the
+  song, and sparkles burst in the loud parts. It reads what the TV outputs, never the microphone,
+  and adapts to each song's own loudness.
+- **PS3 month colors.** The default theme changes color every month like the console, and shifts from
+  day to night. Purple, Classic Blue, Black and Pink are also built in.
+- **Fully tweakable from the remote.** Wave Controls exposes every setting of the original as a
+  slider: colors, speed, shape, glow, and sparkle count, size and speed. Changes show live and also
+  apply to the screensaver.
+
+Details: [launcher/README.md → Wallpaper](launcher/README.md#wallpaper).
+
 ## Contents
 
 - [What gets hidden](#what-gets-hidden)

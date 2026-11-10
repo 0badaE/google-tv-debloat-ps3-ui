@@ -14,8 +14,8 @@ on the Google TV Streamer 4K (Android 14) at a steady 60 fps.
 - [Install](#install)
 - [Make it your Home screen](#make-it-your-home-screen)
 - [Permissions](#permissions)
+- [Wallpaper](#wallpaper): themes, music reaction, [Wave Controls](#wave-controls), origin
 - [Screensaver](#screensaver)
-- [Wave Controls](#wave-controls)
 - [Switch back](#switch-back)
 - [Limitations](#limitations)
 - [Troubleshooting](#troubleshooting)
@@ -31,13 +31,11 @@ on the Google TV Streamer 4K (Android 14) at a steady 60 fps.
   as they're installed.
 - **Motion:** every move takes 1/6 s and eases out, like the PS3. Crossbar remembers where you were
   in each column.
-- **Wallpaper:** the PS3 wave, drawn with OpenGL ES 3. Themes (Settings → Theme):
-  - **Monthly**: the console's month colors, brighter by day and darker at night;
-  - **Purple**, **Classic Blue**, **Black**, **Pink**;
-  - **Custom**: whatever you set in [Wave Controls](#wave-controls).
-- **Music:** while something plays, on the home screen and in the screensaver, the wave flows
-  faster, its glow rises and falls with the song, and sparkles grow more numerous and brighter in the
-  loud parts. It uses Android's audio visualizer on what the TV plays; no microphone.
+- **Wallpaper:** the PS3 wave, ported from [linkev/PlayStation-3-XMB](https://github.com/linkev/PlayStation-3-XMB)
+  and drawn with OpenGL ES 3. Monthly PS3 colors or fixed themes, and every setting adjustable from
+  the remote. See [Wallpaper](#wallpaper).
+- **Music:** while something plays, the wave flows faster, its glow rises and falls with the song,
+  and sparkles grow in the loud parts. No microphone. See [How it reacts to music](#how-it-reacts-to-music).
 - **Screensaver:** the same moving wave with Google TV's Ambient layout on top. See [Screensaver](#screensaver).
 - **Clock** in the top right, and **navigation sounds** with a startup chime when the TV wakes.
   Settings → Sounds picks the set (moving through the list lets you hear each one):
@@ -162,7 +160,64 @@ Google's Ambient mode is `com.google.android.apps.tv.dreamx/.service.Backdrop`. 
 in Crossbar starts it right away. Changing the screensaver in Google's Ambient Mode settings may
 switch it back to Google's.
 
-## Wave Controls
+## Wallpaper
+
+The wave behind the menu is the heart of Crossbar. It's a real-time recreation of the PS3's XMB wave,
+running natively on the TV with OpenGL ES 3 at 60 fps, in three layers:
+
+1. **Background**: a two-color gradient, set by the theme.
+2. **Wave**: a translucent 100 × 100 mesh. A displacement field on the CPU (`SplineField.java`) bends
+   it into the familiar ribbon, and shaders on the GPU add the slow travel, the ripples, and the
+   Fresnel glow along its edges.
+3. **Sparkles**: up to 4000 additive particles drifting along the wave.
+
+### Where it comes from
+
+The wave is ported from **[linkev/PlayStation-3-XMB](https://github.com/linkev/PlayStation-3-XMB)**
+(MIT License, © 2025 Mart), a web recreation of the PS3 interface in WebGL. Crossbar takes its wave
+and particle shaders (`ps3xmbwave/spline.js` and `particles.js`), its displacement field, the
+names, ranges and defaults of its settings panels, and the 24 PS3 month gradients it extracted from
+the console's own files. The port moves all of it from JavaScript and WebGL to Java and OpenGL ES, and
+adds the music reaction, the themes, and remote-friendly controls. If you like the wave, go star the
+original.
+
+### Themes
+
+Settings → Theme:
+
+| Theme | Look |
+|---|---|
+| **Monthly** (default) | The real PS3 behavior: each month has its own color, like the console. It fades from the night gradient to the day one between 6:00 and 8:30, and back between 16:00 and 18:30. Day colors are dimmed a little so white text stays readable. |
+| **Purple**, **Classic Blue**, **Black**, **Pink** | Fixed gradients. |
+| **Custom** | Your own background, from [Wave Controls](#wave-controls). |
+
+### How it reacts to music
+
+When the TV plays music, from any app, the wallpaper comes alive. This works on the home screen and
+in the screensaver:
+
+- **The wave speeds up**, to roughly 2.5 to 3.5 times its resting speed, easing in so it never jerks.
+- **The glow breathes with the song.** It brightens in the loud parts and settles in the quiet ones.
+- **The sparkles grow** in number and brightness when the song builds, and fade in rather than pop.
+- When the music stops, everything eases back to rest over a couple of seconds.
+
+How it works (`AudioPulse.java` and `WaveView.react()`):
+
+1. Android's `Visualizer` on audio session 0 reads a coarse spectrum of **what the TV outputs**. No
+   microphone is used, and no audio is recorded or stored.
+2. For each spectrum it captures, Crossbar sums the energy between about 90 Hz and 4.5 kHz, the body of the music.
+3. It compares that with **the song's own recent peak**, which decays about 10% a second. A quiet
+   acoustic track and a loud EDM track both get the full range of motion.
+4. A fast envelope (quick rise, slower fall) is compared with a slow running average. The result is a
+   "swell": how much louder or quieter this moment is than the last few seconds. That swell drives
+   the glow, the sparkle density and part of the speed.
+
+It needs `RECORD_AUDIO` (see [Permissions](#permissions)), because Android files its visualizer under
+the microphone permission. Without it, the wave still speeds up when music plays, but doesn't pulse.
+The wave is only drawn on Crossbar and its screensaver, so you won't see the reaction while the music
+app itself is on screen. Start a song, then press Home.
+
+### Wave Controls
 
 Settings → Wave Controls: every wallpaper setting as a slider, with the same names, ranges and
 defaults as the web version's panels.
