@@ -1,0 +1,37 @@
+# Packages that debloat hides and restore brings back. One per line; '#' starts a comment.
+# Device: Google TV Streamer 4K (kirkwood), Android 14. Details for every package: docs/app-inventory.md
+
+# Ads, tracking and telemetry
+com.google.android.adservices.api
+com.google.android.ext.adservices.api
+com.google.android.sdksandbox
+com.google.android.ondevicepersonalization.services
+com.google.android.federatedcompute
+com.google.android.tv.remotecontrol.logging
+com.google.android.feedback
+com.android.tv.feedbackconsent
+com.google.android.partnersetup
+android.autoinstalls.config.google.sabrina
+
+# Unused Google apps
+com.google.android.play.games
+com.google.android.videos
+
+# Not useful on a TV
+com.google.android.healthconnect.controller
+com.google.android.health.connect.backuprestore
+com.android.dynsystem
+com.android.cameraextensions
+com.android.mtp
+com.google.android.syncadapters.calendar
+com.android.wallpaperpicker
+com.android.dreams.basic
+com.android.htmlviewer
+com.google.android.backdrop
+
+# Kept on purpose (uncomment to hide):
+# com.google.android.katniss              # voice search / Assistant
+# com.google.android.apps.mediashell      # Chromecast built-in
+# com.google.android.apps.tv.dreamx       # Ambient mode screensaver
+# com.google.android.marvin.talkback      # TalkBack
+# com.google.android.tts                  # Speech Services

@@ -1,0 +1,141 @@
+package,group,verdict,description
+com.amazon.amazonvideo.livingroom,Streaming apps (installed by you),YOURS,Prime Video
+com.disney.disneyplus,Streaming apps (installed by you),YOURS,Disney+
+com.netflix.ninja,Streaming apps (installed by you),YOURS,Netflix
+com.google.android.youtube.tv,Streaming apps (installed by you),YOURS,YouTube for TV
+com.spotify.tv.android,Streaming apps (installed by you),YOURS,Spotify
+com.google.android.adservices.api,Ads tracking and telemetry,BLOAT,Privacy Sandbox ad services: ad topics and ad-conversion measurement
+com.google.android.ext.adservices.api,Ads tracking and telemetry,BLOAT,Second copy of Privacy Sandbox ad services (ExtServices module)
+com.google.android.sdksandbox,Ads tracking and telemetry,BLOAT,Sandbox that runs third-party ad SDKs for Privacy Sandbox
+com.google.android.ondevicepersonalization.services,Ads tracking and telemetry,BLOAT,On-device ad and content personalization
+com.google.android.federatedcompute,Ads tracking and telemetry,BLOAT,Federated learning: trains Google models on your usage and uploads the results
+com.google.android.tv.remotecontrol.logging,Ads tracking and telemetry,BLOAT,Logs how you use the remote and sends it to Google
+com.google.android.feedback,Ads tracking and telemetry,BLOAT,Uploads 'Send feedback' and crash reports to Google
+com.android.tv.feedbackconsent,Ads tracking and telemetry,BLOAT,Consent prompt for sending feedback and bug reports
+com.google.android.partnersetup,Ads tracking and telemetry,BLOAT,RLZ partner pings that tell Google which partner sold the device
+android.autoinstalls.config.google.sabrina,Ads tracking and telemetry,BLOAT,Play Auto Install config: lets Google push promoted apps to the device
+com.google.android.tvrecommendations,Ads tracking and telemetry,BLOAT,Old recommendation feed stub (already disabled at the factory)
+com.google.android.play.games,Unused Google apps,BLOAT,Google Play Games
+com.google.android.apps.education.cast2class,Unused Google apps,BLOAT,Cast for Education (already removed for your user at the factory)
+com.android.gallery3d,Unused Google apps,BLOAT,Gallery app (already disabled at the factory)
+com.google.android.healthconnect.controller,Not useful on a TV,OPTIONAL,Health Connect (fitness data hub for phones)
+com.google.android.health.connect.backuprestore,Not useful on a TV,OPTIONAL,Health Connect backup
+com.google.android.devicelockcontroller,Not useful on a TV,NEVER,Device Lock for devices bought on credit (inert here; Android refuses to disable it)
+com.android.dynsystem,Not useful on a TV,OPTIONAL,Dynamic System Updates (developers booting test images)
+com.android.cameraextensions,Not useful on a TV,OPTIONAL,Camera extensions (the device has no camera)
+com.android.mtp,Not useful on a TV,OPTIONAL,USB file transfer (MTP) to a computer
+com.google.android.syncadapters.calendar,Not useful on a TV,OPTIONAL,Google Calendar sync
+com.android.wallpaperpicker,Not useful on a TV,OPTIONAL,Wallpaper picker (Google TV has no wallpaper)
+com.android.dreams.basic,Not useful on a TV,OPTIONAL,Basic color screensaver (not your active screensaver)
+com.android.htmlviewer,Not useful on a TV,OPTIONAL,Shows legal and license pages in Settings
+com.google.android.backdrop,Not useful on a TV,OPTIONAL,Old Backdrop screensaver stub (Ambient mode replaced it)
+com.google.android.katniss,Features you may use,OPTIONAL,Google app for TV: voice search and Assistant (mic button and the search bar on Home)
+com.google.android.apps.mediashell,Features you may use,OPTIONAL,Chromecast built-in: casting from your phone or laptop
+com.google.android.apps.tv.dreamx,Features you may use,OPTIONAL,Ambient mode screensaver (photos and art plus suggestions); this is your active screensaver
+com.google.android.videos,Features you may use,OPTIONAL,Google TV / Play Movies: the Shop tab and the movies you bought or rented from Google
+com.google.android.marvin.talkback,Features you may use,OPTIONAL,TalkBack screen reader (accessibility)
+com.google.android.tts,Features you may use,OPTIONAL,Speech Services: text-to-speech for TalkBack and Assistant replies
+com.android.providers.tv,Live TV,NEVER,TV Provider: the channel and program database behind the Live tab
+com.google.android.apps.tv.launcherx,Live TV,NEVER,Google TV Home screen (includes the Live tab and the quick-settings panel)
+com.google.android.tvlauncher,Live TV,NEVER,Old launcher stub that the Home screen falls back on
+com.google.android.bluetooth,Remote Bluetooth and input,NEVER,Bluetooth stack (the remote connects over Bluetooth)
+com.google.android.bluetooth.kirkwood,Remote Bluetooth and input,NEVER,Bluetooth settings for this device
+com.android.bluetooth.chromecast,Remote Bluetooth and input,NEVER,Bluetooth settings for Chromecast hardware
+com.google.android.tv.axel,Remote Bluetooth and input,NEVER,Remote setup: pairing and programming the remote to control your TV's power and volume
+com.google.android.tv.axel.overlay.kirkwood,Remote Bluetooth and input,NEVER,Remote setup settings for this device
+com.google.android.tv.dfuservice,Remote Bluetooth and input,NEVER,Remote firmware updates and Find My Remote
+com.google.android.tv.overlay.dfuservice,Remote Bluetooth and input,NEVER,Remote firmware update settings
+com.google.android.tv.remote.service,Remote Bluetooth and input,NEVER,Android TV Remote Service: lets you use your phone as a remote
+com.android.inputdevices,Remote Bluetooth and input,NEVER,Keyboard and remote layouts
+com.google.android.inputmethod.latin,Remote Bluetooth and input,NEVER,Gboard: the on-screen keyboard
+com.android.companiondevicemanager,Remote Bluetooth and input,NEVER,Pairs phones and accessories
+com.mediatek.hdmicecframeworkresoverlay,Remote Bluetooth and input,NEVER,HDMI-CEC: lets the remote control your TV's power and volume over HDMI
+com.android.tv.settings,Picture sound and settings,NEVER,The Settings app (picture and sound settings included)
+com.android.tv.settings.gms.resoverlay,Picture sound and settings,NEVER,Settings resources
+com.android.tv.settings.google.resoverlay,Picture sound and settings,NEVER,Settings resources
+com.android.tv.settings.kirkwood.resoverlay,Picture sound and settings,NEVER,Settings resources for this device
+com.android.tv.settings.kirkwood.securesettingsoverlay,Picture sound and settings,NEVER,Settings secure defaults for this device
+com.google.android.tv.settings.energymodes.resoverlay,Picture sound and settings,NEVER,Settings: energy modes
+com.google.tv.settings.chromecast,Picture sound and settings,NEVER,Settings resources for Chromecast hardware
+com.android.settings.intelligence,Picture sound and settings,NEVER,Settings search and suggestions
+com.dolby.android.audio.service,Picture sound and settings,NEVER,Dolby Audio and Atmos
+com.google.android.audioproxy,Picture sound and settings,NEVER,Audio output: spatial audio and audio sync (latency) settings
+com.google.android.audioproxy.overlay,Picture sound and settings,NEVER,Audio output settings
+com.google.android.gms,Google core services,NEVER,Google Play services
+com.google.android.gsf,Google core services,NEVER,Google Services Framework
+com.android.vending,Google core services,NEVER,Play Store (needed to install and update apps)
+com.google.android.webview,Google core services,NEVER,Android System WebView (apps use it to show web pages and sign-in screens)
+com.google.android.overlay.googlewebview,Google core services,NEVER,WebView settings
+com.google.android.configupdater,Google core services,NEVER,Updates security certificates and system config
+com.google.android.modulemetadata,Google core services,NEVER,Info about system update modules
+com.google.android.ext.services,Google core services,NEVER,Core system extension services
+com.google.android.ext.shared,Google core services,NEVER,Shared system library
+com.google.android.rkpdapp,Google core services,NEVER,Remote key provisioning (DRM keys that Netflix and others need for HD playback)
+com.google.android.packageinstaller,Google core services,NEVER,Installs and uninstalls apps
+com.google.android.permissioncontroller,Google core services,NEVER,App permissions
+com.google.android.safetycenter.resources,Google core services,NEVER,Permission and safety resources
+com.google.android.tungsten.setupwraith,Google core services,NEVER,Setup wizard (also handles account linking and factory reset)
+com.google.android.chromecast.setupcustomization,Google core services,NEVER,Setup wizard settings for this device
+com.google.android.chromecast.appstate,Google core services,NEVER,Tracks which app is in front (always-running system service)
+com.google.android.chromecast.chromecastservice,Google core services,NEVER,Chromecast system service (MediaTek chip)
+com.google.android.chromecast.chromecastservice.kirkwood,Google core services,NEVER,Chromecast system service settings
+com.google.android.chromecast.chromecastservice.kirkwoodaudio,Google core services,NEVER,Chromecast system service audio settings
+com.google.android.chromecast.chromecastserviceoverlay,Google core services,NEVER,Chromecast system service settings
+com.netflix.tokenmanager,Google core services,NEVER,Netflix device token (Netflix sign-in and the remote's Netflix button)
+com.mediatek.nfxservice,Google core services,NEVER,MediaTek Netflix service (always-running system service)
+android,Android system,NEVER,Android framework
+android.auto_generated_rro_product__,Android system,NEVER,Framework settings
+android.auto_generated_rro_vendor__,Android system,NEVER,Framework settings
+android.chromecast,Android system,NEVER,Framework settings for Chromecast hardware
+com.android.systemui,Android system,NEVER,System UI (notifications and dialogs)
+com.android.systemui.auto_generated_rro_product__,Android system,NEVER,System UI settings
+com.google.android.systemui.gtvoverlayx,Android system,NEVER,System UI settings for Google TV
+com.android.providers.settings,Android system,NEVER,Stores every system setting
+com.android.providers.settings.auto_generated_rro_product__,Android system,NEVER,Default system settings
+com.android.tv.overlay.settingsprovider,Android system,NEVER,Default system settings for TV
+com.google.android.tv.overlay.settingsprovider,Android system,NEVER,Default system settings for Chromecast
+com.google.android.overlay.gtvssettingsprovider,Android system,NEVER,Default system settings for Google TV
+com.google.android.overlay.tvconfigx,Android system,NEVER,Google TV config
+com.android.tv.overlay.framework,Android system,NEVER,TV framework settings
+com.android.tv.overlay.framework.kirkwood,Android system,NEVER,TV framework settings for this device
+com.android.tv.overlay.lps.disabled,Android system,NEVER,Low-power standby setting
+com.android.tv.frameworkpackagestubs,Android system,NEVER,Placeholders that stop missing-app crashes
+com.android.providers.calendar,Android system,NEVER,Calendar storage (Google services expect it)
+com.android.providers.contacts,Android system,NEVER,Contacts storage (Google account sign-in uses it)
+com.android.providers.downloads,Android system,NEVER,Download manager (Play Store and system updates)
+com.android.providers.media,Android system,NEVER,Media storage
+com.google.android.providers.media.module,Android system,NEVER,Media storage module
+com.android.providers.userdictionary,Android system,NEVER,Keyboard dictionary
+com.android.externalstorage,Android system,NEVER,USB storage access
+com.android.shell,Android system,NEVER,ADB shell (this tool needs it)
+com.android.intentresolver,Android system,NEVER,'Open with' app chooser
+com.android.keychain,Android system,NEVER,Certificate storage
+com.android.certinstaller,Android system,NEVER,Certificate installer
+com.android.se,Android system,NEVER,Secure element (hardware security)
+com.android.pacprocessor,Android system,NEVER,Proxy auto-config
+com.android.proxyhandler,Android system,NEVER,Proxy support
+com.android.vpndialogs,Android system,NEVER,VPN connection prompts
+com.android.location.fused,Android system,NEVER,Location (time zone and regional content)
+com.android.managedprovisioning,Android system,NEVER,Device setup and provisioning
+com.android.backupconfirm,Android system,NEVER,Backup and restore prompts
+com.android.localtransport,Android system,NEVER,Local backup
+com.android.sharedstoragebackup,Android system,NEVER,Shared storage backup
+com.android.wallpaperbackup,Android system,NEVER,Wallpaper backup
+com.android.cts.ctsshim,Android system,NEVER,System update test stub (updates check for it)
+com.android.cts.priv.ctsshim,Android system,NEVER,System update test stub (updates check for it)
+com.android.virtualmachine.res,Android system,NEVER,Virtualization resources
+com.google.android.networkstack,Network,NEVER,Network stack (Wi-Fi and Ethernet connections)
+com.google.android.tv.overlay.networkstack,Network,NEVER,Network stack settings
+com.android.networkstack.chromecast,Network,NEVER,Network stack settings for Chromecast hardware
+com.google.android.networkstack.tethering,Network,NEVER,Tethering and network module
+com.google.android.networkstack.tethering.kirkwood,Network,NEVER,Tethering settings
+com.android.networkstack.tethering.chromecast,Network,NEVER,Tethering settings for Chromecast hardware
+com.google.android.connectivity.resources,Network,NEVER,Connectivity resources
+com.google.android.connectivity.resources.kirkwood,Network,NEVER,Connectivity resources for this device
+com.google.android.wifi.resources,Network,NEVER,Wi-Fi resources
+com.google.android.wifi.resources.kirkwood,Network,NEVER,Wi-Fi resources for this device
+com.android.tv.overlay.wifi.resources,Network,NEVER,Wi-Fi settings for TV
+com.google.android.wifi.dialog,Network,NEVER,Wi-Fi prompts
+com.google.android.captiveportallogin,Network,NEVER,Sign-in page for hotel and public Wi-Fi
+com.google.android.hotspot2.osulogin,Network,NEVER,Passpoint Wi-Fi sign-in
+com.google.android.uwb.resources,Network,NEVER,Ultra-wideband resources

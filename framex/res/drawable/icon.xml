@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The site's own favicon: a play mark on a dark rounded tile. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <path android:pathData="M110,0h292a110,110 0 0,1 110,110v292a110,110 0 0,1 -110,110h-292a110,110 0 0,1 -110,-110v-292a110,110 0 0,1 110,-110z"
+        android:fillColor="#FF09090B" />
+    <path android:pathData="M110,24h292a86,86 0 0,1 86,86v292a86,86 0 0,1 -86,86h-292a86,86 0 0,1 -86,-86v-292a86,86 0 0,1 86,-86z"
+        android:strokeColor="#FF27272A" android:strokeWidth="16" android:fillColor="#00000000" />
+    <path android:pathData="M160,140L360,256L160,372Z" android:fillColor="#F2FFFFFF" />
+    <path android:pathData="M230,180L320,256L230,332Z" android:fillColor="#FF09090B" />
+</vector>

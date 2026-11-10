@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 16:9 TV banner: a violet field with two soft wave strokes. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path android:pathData="M0,0h320v180h-320z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="0"
+                android:endX="320" android:endY="180"
+                android:startColor="#FF3E2A70" android:endColor="#FF9A62B4" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M-10,118 C60,80 130,150 200,110 S300,70 330,96"
+        android:strokeColor="#99FFFFFF" android:strokeWidth="2.5" android:fillColor="#00000000" />
+    <path android:pathData="M-10,128 C70,96 140,160 210,122 S300,88 330,110"
+        android:strokeColor="#4DFFFFFF" android:strokeWidth="1.5" android:fillColor="#00000000" />
+    <path android:pathData="M60,62 l14,0 l0,-14 l8,0 l0,14 l14,0 l0,8 l-14,0 l0,14 l-8,0 l0,-14 l-14,0z"
+        android:fillColor="#FFFFFFFF" />
+</vector>

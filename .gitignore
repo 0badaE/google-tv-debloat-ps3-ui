@@ -1,0 +1,13 @@
+# Downloaded Android platform-tools (get your own, see README)
+tools/
+
+# Per-device package snapshots and change logs
+backups/
+
+# Launcher build output and local signing key
+launcher/build/
+launcher/signing/
+
+# frameXTV app build output and local signing key
+framex/build/
+framex/signing/
