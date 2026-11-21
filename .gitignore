@@ -11,3 +11,6 @@ launcher/signing/
 # frameXTV app build output and local signing key
 framex/build/
 framex/signing/
+
+# Third-party projects cloned for study
+reference/
