@@ -8,6 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.provider.Settings;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -254,6 +258,47 @@ public final class HomeActivity extends Activity implements XmbView.Host {
         }
     }
 
+    private static final String OPEN = "Open", INFO = "App info", UNINSTALL = "Uninstall";
+    private Catalog.Item menuItem;
+    private String[] menuOptions;
+
+    /** Holding OK on an app: Open, App info, and Uninstall for apps you installed. */
+    @Override
+    public void onHold(Catalog.Item item) {
+        if (!item.key.startsWith("app:")) {
+            onActivate(item);
+            return;
+        }
+        String pkg = item.key.substring(4);
+        boolean removable;
+        try {
+            removable = (getPackageManager().getApplicationInfo(pkg, 0).flags & ApplicationInfo.FLAG_SYSTEM) == 0;
+        } catch (PackageManager.NameNotFoundException e) {
+            return; // uninstalled meanwhile; the catalog reloads on its own
+        }
+        menuItem = item;
+        menuOptions = removable ? new String[]{OPEN, INFO, UNINSTALL} : new String[]{OPEN, INFO};
+        XmbView.Panel p = new XmbView.Panel("app", item.title, menuOptions, null, -1);
+        p.sel = 0;
+        xmb.openPanel(p);
+    }
+
+    private void onAppMenu(String option) {
+        Uri pkg = Uri.parse("package:" + menuItem.key.substring(4));
+        if (OPEN.equals(option)) {
+            onActivate(menuItem);
+            return;
+        }
+        Intent i = INFO.equals(option)
+                ? new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, pkg)
+                : new Intent(Intent.ACTION_DELETE, pkg);
+        try {
+            startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "Can't open " + option + " for " + pkg, e);
+        }
+    }
+
     @Override
     public void onPanelPreview(String panel, int option) {
         if ("theme".equals(panel)) wave.showTheme(Themes.IDS[option], 500);
@@ -270,6 +315,8 @@ public final class HomeActivity extends Activity implements XmbView.Host {
         } else if ("sounds".equals(panel)) {
             sounds.setStyle(Sounds.STYLES[option]);
             prefs.edit().putString("sound_style", Sounds.STYLES[option]).apply();
+        } else if ("app".equals(panel)) {
+            onAppMenu(menuOptions[option]);
         }
     }
 

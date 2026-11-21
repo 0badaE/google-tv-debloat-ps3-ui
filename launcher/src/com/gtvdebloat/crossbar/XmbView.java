@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ import java.util.List;
 final class XmbView extends View {
     interface Host {
         void onActivate(Catalog.Item item);
+        /** OK held on an item. */
+        void onHold(Catalog.Item item);
         void onPanelPreview(String panel, int option);
         void onPanelCommit(String panel, int option);
         void onPanelCancel(String panel);
@@ -72,6 +75,8 @@ final class XmbView extends View {
     private static final float CHIP_PX = 21;
     private final Bitmap chip = Glyphs.render(Glyphs.CHIP, (int) CHIP_PX);
     private int ramPct = -1;
+    /** OK is down on an item and hasn't turned into a hold yet. */
+    private boolean okDown;
     private final Path check = new Path();
 
     private List<Catalog.Category> cats = new ArrayList<>();
@@ -218,8 +223,11 @@ final class XmbView extends View {
     // --- input -------------------------------------------------------------------------------
 
     boolean handleKey(KeyEvent e) {
-        if (e.getAction() != KeyEvent.ACTION_DOWN || cats.isEmpty()) return false;
-        if (controls != null && controlsAnim.to == 1) {
+        if (cats.isEmpty()) return false;
+        boolean controlsOpen = controls != null && controlsAnim.to == 1;
+        if (panel == null && !controlsOpen && isOk(e.getKeyCode())) return okKey(e);
+        if (e.getAction() != KeyEvent.ACTION_DOWN) return false;
+        if (controlsOpen) {
             controls.key(e);
             if (controls.closing()) controlsAnim.set(0, now(), MOVE_MS + 60);
             invalidate();
@@ -245,6 +253,8 @@ final class XmbView extends View {
                 case KeyEvent.KEYCODE_ENTER:
                 case KeyEvent.KEYCODE_NUMPAD_ENTER:
                 case KeyEvent.KEYCODE_BUTTON_A: {
+                    // The hold that opened this panel keeps repeating until OK is let go.
+                    if (e.getRepeatCount() > 0) return true;
                     Panel p = panel;
                     p.saved = p.sel;
                     host.onPanelCommit(p.id, p.sel);
@@ -288,16 +298,6 @@ final class XmbView extends View {
                     s.play(Sounds.TICK);
                 }
                 return true;
-            case KeyEvent.KEYCODE_DPAD_CENTER:
-            case KeyEvent.KEYCODE_ENTER:
-            case KeyEvent.KEYCODE_NUMPAD_ENTER:
-            case KeyEvent.KEYCODE_BUTTON_A: {
-                List<Catalog.Item> items = cats.get(ci).items;
-                if (items.isEmpty()) return true;
-                s.play(Sounds.OK);
-                host.onActivate(items.get(sel.get(ci)));
-                return true;
-            }
             case KeyEvent.KEYCODE_BACK:
             case KeyEvent.KEYCODE_ESCAPE:
             case KeyEvent.KEYCODE_BUTTON_B:
@@ -309,6 +309,31 @@ final class XmbView extends View {
             default:
                 return false;
         }
+    }
+
+    private static boolean isOk(int code) {
+        return code == KeyEvent.KEYCODE_DPAD_CENTER || code == KeyEvent.KEYCODE_ENTER
+                || code == KeyEvent.KEYCODE_NUMPAD_ENTER || code == KeyEvent.KEYCODE_BUTTON_A;
+    }
+
+    /** A press opens the item when OK is let go; holding it opens the item's menu instead. */
+    private boolean okKey(KeyEvent e) {
+        Catalog.Item it = current();
+        if (it == null) return true;
+        if (e.getAction() == KeyEvent.ACTION_DOWN) {
+            if (e.getRepeatCount() == 0) {
+                okDown = true;
+            } else if (okDown && e.getEventTime() - e.getDownTime() >= ViewConfiguration.getLongPressTimeout()) {
+                okDown = false;
+                host.sounds().play(Sounds.OK);
+                host.onHold(it);
+            }
+        } else if (e.getAction() == KeyEvent.ACTION_UP && okDown) {
+            okDown = false;
+            host.sounds().play(Sounds.OK);
+            host.onActivate(it);
+        }
+        return true;
     }
 
     private void moveCat(int d) {

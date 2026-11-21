@@ -8,6 +8,8 @@
 
     <!-- A home screen has to list every installed app. -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!-- Hold OK on an app → Uninstall opens Android's own uninstall prompt. -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <!-- Weather for the screensaver (Open-Meteo), and the network status shown with it. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
