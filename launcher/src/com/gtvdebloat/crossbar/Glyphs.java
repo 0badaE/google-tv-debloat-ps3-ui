@@ -14,7 +14,7 @@ final class Glyphs {
     static final int TOOLBOX = 0, TV = 1, FILM = 2, MUSIC = 3, APPS = 4, PALETTE = 5, SPEAKER = 6,
             DISPLAY = 7, WIFI = 8, REMOTE = 9, MOON = 10, CLOCK = 11, GEAR = 12, AMBIENT = 13,
             LIVE = 14, HOME = 15, MIC = 16, DOWNLOAD = 17, SUN = 18, CLOUD = 19, PARTLY = 20, RAIN = 21,
-            SNOW = 22, STORM = 23, FOG = 24, SLIDERS = 25;
+            SNOW = 22, STORM = 23, FOG = 24, SLIDERS = 25, CHIP = 26;
 
     /** Shadow padding around the glyph, as a fraction of the glyph size, on each side. */
     static final float PAD = 0.18f;
@@ -272,6 +272,19 @@ final class Glyphs {
                 p.op(circle(66, 50, 10), Path.Op.UNION);
                 p.op(rr(14, 69, 86, 77, 4), Path.Op.UNION);
                 p.op(circle(46, 73, 10), Path.Op.UNION);
+                break;
+            }
+            case CHIP: {
+                // Few, thick pins: it's shown small, inside the RAM ring.
+                p.addPath(rr(22, 22, 78, 78, 10));
+                p.op(rr(34, 34, 66, 66, 5), Path.Op.DIFFERENCE);
+                p.op(rr(42, 42, 58, 58, 3), Path.Op.UNION);
+                for (float c : new float[]{38, 62}) {
+                    p.op(rr(c - 6, 4, c + 6, 24, 3), Path.Op.UNION);
+                    p.op(rr(c - 6, 76, c + 6, 96, 3), Path.Op.UNION);
+                    p.op(rr(4, c - 6, 24, c + 6, 3), Path.Op.UNION);
+                    p.op(rr(76, c - 6, 96, c + 6, 3), Path.Op.UNION);
+                }
                 break;
             }
             case DOWNLOAD:

@@ -38,6 +38,8 @@ on the Google TV Streamer 4K (Android 14) at a steady 60 fps.
   and sparkles grow in the loud parts. No microphone. See [How it reacts to music](#how-it-reacts-to-music).
 - **Screensaver:** the same moving wave with Google TV's Ambient layout on top. See [Screensaver](#screensaver).
 - **Clock** in the top right, and **navigation sounds** with a startup chime when the TV wakes.
+- **RAM in use** next to the clock: a glass ring around a chip icon, with the percentage. It
+  refreshes every 3 seconds while Crossbar is on screen and turns amber from 85%.
   Settings → Sounds picks the set (moving through the list lets you hear each one):
   - **Zen** (default): paper, soft wood and quiet chimes from the [uisfx](https://uisfx.com) "zen"
     pack (CC0). Up/Down plays `hover`, Left/Right `swipe`, OK `open`, Back `back`, waking up `wake`.
@@ -299,7 +301,7 @@ key to install over the previous version.
 | File | What it does |
 |---|---|
 | `HomeActivity.java` | The home screen: wires everything together, launches apps, themes and panels |
-| `XmbView.java` | The menu: layout, motion, Theme and Sounds panels, clock |
+| `XmbView.java` | The menu: layout, motion, Theme and Sounds panels, clock, RAM ring |
 | `Catalog.java` | Builds the columns from installed apps and settings shortcuts |
 | `WaveView.java` | OpenGL renderer: background, wave and sparkles, music reaction |
 | `SplineField.java` | CPU wave displacement field (ported from the web version) |

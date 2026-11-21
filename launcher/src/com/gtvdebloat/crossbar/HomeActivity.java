@@ -1,6 +1,7 @@
 package com.gtvdebloat.crossbar;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,6 +43,16 @@ public final class HomeActivity extends Activity implements XmbView.Host {
             if (Themes.MONTHLY.equals(themeId)) wave.showTheme(themeId, 8000);
             long ms = System.currentTimeMillis();
             handler.postDelayed(this, 60_000 - ms % 60_000 + 50);
+        }
+    };
+
+    private final ActivityManager.MemoryInfo mem = new ActivityManager.MemoryInfo();
+    private final Runnable ramTick = new Runnable() {
+        @Override
+        public void run() {
+            getSystemService(ActivityManager.class).getMemoryInfo(mem);
+            xmb.setRam(Math.round(100f * (mem.totalMem - mem.availMem) / mem.totalMem));
+            handler.postDelayed(this, 3000);
         }
     };
 
@@ -112,11 +123,14 @@ public final class HomeActivity extends Activity implements XmbView.Host {
         wave.onResume();
         handler.removeCallbacks(minuteTick);
         minuteTick.run();
+        handler.removeCallbacks(ramTick);
+        ramTick.run();
     }
 
     @Override
     protected void onStop() {
         handler.removeCallbacks(minuteTick);
+        handler.removeCallbacks(ramTick);
         wave.onPause();
         super.onStop();
     }

@@ -65,8 +65,13 @@ final class XmbView extends View {
     private final Paint border = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint fill = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint clockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint ring = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF r = new RectF();
     private final Bitmap glow;
+    // Baked at the size it's drawn (CHIP_PX on a 1920-wide screen) so it stays crisp.
+    private static final float CHIP_PX = 21;
+    private final Bitmap chip = Glyphs.render(Glyphs.CHIP, (int) CHIP_PX);
+    private int ramPct = -1;
     private final Path check = new Path();
 
     private List<Catalog.Category> cats = new ArrayList<>();
@@ -109,6 +114,9 @@ final class XmbView extends View {
         border.setStyle(Paint.Style.STROKE);
         border.setColor(0xFFFFFFFF);
         border.setStrokeWidth(3);
+        ring.setStyle(Paint.Style.STROKE);
+        ring.setStrokeWidth(4);
+        ring.setStrokeCap(Paint.Cap.ROUND);
 
         glow = makeGlow();
         check.moveTo(-9, 0);
@@ -158,6 +166,13 @@ final class XmbView extends View {
 
     void setClock(String text) {
         clock = text;
+        invalidate();
+    }
+
+    /** RAM in use, 0..100, shown in a ring left of the clock. */
+    void setRam(int pct) {
+        if (pct == ramPct) return;
+        ramPct = pct;
         invalidate();
     }
 
@@ -457,6 +472,42 @@ final class XmbView extends View {
         fill.setShader(null);
         clockPaint.setAlpha((int) (255 * a));
         c.drawText(clock, right - 8, top + h / 2 + 9, clockPaint);
+        drawRam(c, a, right - w - 14, top, h);
+    }
+
+    /** Glass pill: a ring filling with RAM use around a chip icon, then the percentage. */
+    private void drawRam(Canvas c, float a, float right, float top, float h) {
+        if (ramPct < 0) return;
+        String text = ramPct + "%";
+        float d = 38, padL = 7, gap = 10, padR = 20;
+        float w = padL + d + gap + clockPaint.measureText(text) + padR;
+        r.set(right - w, top, right, top + h);
+        // Frosted fill brighter at the top, with a thin rim: the same glass as the panels.
+        fill.setShader(new LinearGradient(0, r.top, 0, r.bottom, 0x38FFFFFF, 0x12FFFFFF, Shader.TileMode.CLAMP));
+        fill.setAlpha((int) (255 * a));
+        c.drawRoundRect(r, h / 2, h / 2, fill);
+        fill.setShader(null);
+        ring.setShader(null);
+        ring.setStrokeWidth(1.5f);
+        ring.setColor(0xFFFFFFFF);
+        ring.setAlpha((int) (90 * a));
+        c.drawRoundRect(r, h / 2, h / 2, ring);
+
+        float cx = r.left + padL + d / 2, cy = top + h / 2;
+        r.set(cx - d / 2, cy - d / 2, cx + d / 2, cy + d / 2);
+        ring.setStrokeWidth(4);
+        ring.setAlpha((int) (64 * a));
+        c.drawOval(r, ring);
+        // Warm up past 85% so a nearly full TV stands out.
+        ring.setColor(ramPct >= 85 ? 0xFFFFB86B : 0xFFFFFFFF);
+        ring.setAlpha((int) (255 * a));
+        c.drawArc(r, -90, 3.6f * ramPct, false, ring);
+        drawGlyph(c, chip, cx, cy, CHIP_PX, a * 0.9f);
+
+        clockPaint.setTextAlign(Paint.Align.LEFT);
+        clockPaint.setAlpha((int) (255 * a));
+        c.drawText(text, cx + d / 2 + gap, cy + 9, clockPaint);
+        clockPaint.setTextAlign(Paint.Align.RIGHT);
     }
 
     private void drawPanel(Canvas c, Panel p, float a) {
