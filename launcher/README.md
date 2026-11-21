@@ -113,9 +113,10 @@ the TV simply behaves like plain Google TV.
 
 **Lamps and other Google Home devices.** While *any* accessibility service is running, Google's
 smart-home screens switch to an accessibility mode where OK only turns a light on or off, and
-Left/Right no longer change its brightness. So when you hold Home, the helper opens Google's panel
-and then steps aside; as soon as you leave Google's screens, Crossbar switches it back on (and if you
-pressed Home meanwhile, brings up Crossbar). It only re-enables a helper it paused itself, never one
+Left/Right no longer change its brightness. So when you open Google's smart-home screen (from its
+panel), the helper steps aside; as soon as you leave Google's screens, Crossbar switches it back on
+(and if you pressed Home meanwhile, brings up Crossbar). Google's panel itself keeps the helper on,
+so Home goes straight back to Crossbar from there. It only re-enables a helper it paused itself, never one
 you turned off. This needs two extra permissions, below; without them the helper just stays on and
 brightness only works from the Google Home phone app.
 
@@ -274,7 +275,7 @@ These come from Android or Google, not from Crossbar:
 | The screensaver shows "Wi-Fi" instead of the network name, or no weather | Grant the location permissions. Weather also needs the TV to be online. |
 | No "now playing" on the screensaver | Grant notification access. |
 | Colors don't change in Wave Controls | Background colors only show on the Custom theme. Moving one switches to it; or pick Settings → Theme → Custom. |
-| Left/Right doesn't change a lamp's brightness | Grant `WRITE_SECURE_SETTINGS` and usage access, and open the panel by holding Home (that's when the helper steps aside). |
+| Left/Right doesn't change a lamp's brightness | Grant `WRITE_SECURE_SETTINGS` and usage access. The helper steps aside once Google's smart-home screen is open. |
 | The helper shows as off in Accessibility | Normal while Google's panel or smart-home screen is open; it comes back when you leave them. If it stays off elsewhere, turn it on again in Settings → Accessibility. |
 
 For debugging, `adb shell setprop log.tag.Crossbar DEBUG` makes Crossbar log the wave's frame rate

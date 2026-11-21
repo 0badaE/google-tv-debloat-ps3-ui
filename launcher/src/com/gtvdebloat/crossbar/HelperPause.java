@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Steps the Home button helper aside while Google TV's own panel and smart-home screens are open.
+ * Steps the Home button helper aside while Google TV's smart-home screens are open.
  *
  * Any running accessibility service puts Google's smart-home controls into an accessibility mode
- * where Left/Right no longer change a lamp's brightness. So when you hold Home, the helper opens
- * Google's panel and switches itself off; once you leave Google's screens, this switches it back on.
+ * where Left/Right no longer change a lamp's brightness. So when a smart-home screen comes up, the
+ * helper switches itself off; once you leave Google's screens, this switches it back on.
  * It only re-enables what it paused, never a helper you turned off yourself.
  *
  * Needs WRITE_SECURE_SETTINGS (to switch the helper) and usage access (to see which screen is in

@@ -21,7 +21,7 @@
          files it under the microphone permission. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <!-- Lets the Home button helper step aside while Google's panel is open (HelperPause):
+    <!-- Lets the Home button helper step aside while Google's smart-home screen is open (HelperPause):
          switching its own accessibility service, and seeing which screen is in front.
          Both are granted over ADB; see README. -->
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
