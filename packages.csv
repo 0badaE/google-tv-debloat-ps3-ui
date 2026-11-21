@@ -4,11 +4,11 @@ com.disney.disneyplus,Streaming apps (installed by you),YOURS,Disney+
 com.netflix.ninja,Streaming apps (installed by you),YOURS,Netflix
 com.google.android.youtube.tv,Streaming apps (installed by you),YOURS,YouTube for TV
 com.spotify.tv.android,Streaming apps (installed by you),YOURS,Spotify
-com.google.android.adservices.api,Ads tracking and telemetry,BLOAT,Privacy Sandbox ad services: ad topics and ad-conversion measurement
-com.google.android.ext.adservices.api,Ads tracking and telemetry,BLOAT,Second copy of Privacy Sandbox ad services (ExtServices module)
-com.google.android.sdksandbox,Ads tracking and telemetry,BLOAT,Sandbox that runs third-party ad SDKs for Privacy Sandbox
-com.google.android.ondevicepersonalization.services,Ads tracking and telemetry,BLOAT,On-device ad and content personalization
-com.google.android.federatedcompute,Ads tracking and telemetry,BLOAT,Federated learning: trains Google models on your usage and uploads the results
+com.google.android.adservices.api,Ads tracking and telemetry,NEVER,Privacy Sandbox ad services: ad topics and ad-conversion measurement (Google Play system module: hiding it can stop the TV booting after a system update)
+com.google.android.ext.adservices.api,Ads tracking and telemetry,NEVER,Second copy of Privacy Sandbox ad services (ExtServices module) (Google Play system module: hiding it can stop the TV booting after a system update)
+com.google.android.sdksandbox,Ads tracking and telemetry,NEVER,Sandbox that runs third-party ad SDKs for Privacy Sandbox (Google Play system module: hiding it can stop the TV booting after a system update)
+com.google.android.ondevicepersonalization.services,Ads tracking and telemetry,NEVER,On-device ad and content personalization (Google Play system module: hiding it can stop the TV booting after a system update)
+com.google.android.federatedcompute,Ads tracking and telemetry,NEVER,Federated learning: trains Google models on your usage and uploads the results (Google Play system module: hiding it can stop the TV booting after a system update)
 com.google.android.tv.remotecontrol.logging,Ads tracking and telemetry,BLOAT,Logs how you use the remote and sends it to Google
 com.google.android.feedback,Ads tracking and telemetry,BLOAT,Uploads 'Send feedback' and crash reports to Google
 com.android.tv.feedbackconsent,Ads tracking and telemetry,BLOAT,Consent prompt for sending feedback and bug reports
@@ -18,8 +18,8 @@ com.google.android.tvrecommendations,Ads tracking and telemetry,BLOAT,Old recomm
 com.google.android.play.games,Unused Google apps,BLOAT,Google Play Games
 com.google.android.apps.education.cast2class,Unused Google apps,BLOAT,Cast for Education (already removed for your user at the factory)
 com.android.gallery3d,Unused Google apps,BLOAT,Gallery app (already disabled at the factory)
-com.google.android.healthconnect.controller,Not useful on a TV,OPTIONAL,Health Connect (fitness data hub for phones)
-com.google.android.health.connect.backuprestore,Not useful on a TV,OPTIONAL,Health Connect backup
+com.google.android.healthconnect.controller,Not useful on a TV,NEVER,Health Connect (fitness data hub for phones) (Google Play system module: hiding it can stop the TV booting after a system update)
+com.google.android.health.connect.backuprestore,Not useful on a TV,NEVER,Health Connect backup (Google Play system module: hiding it can stop the TV booting after a system update)
 com.google.android.devicelockcontroller,Not useful on a TV,NEVER,Device Lock for devices bought on credit (inert here; Android refuses to disable it)
 com.android.dynsystem,Not useful on a TV,OPTIONAL,Dynamic System Updates (developers booting test images)
 com.android.cameraextensions,Not useful on a TV,OPTIONAL,Camera extensions (the device has no camera)

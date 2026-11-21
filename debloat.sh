@@ -24,6 +24,10 @@ hidden=0 skipped=0 failed=0
 for pkg in $PACKAGES; do
   if ! in_set "$pkg" "$ALL"; then echo "  skip    $pkg (not on this device)"; skipped=$((skipped+1)); continue; fi
   if ! in_set "$pkg" "$INSTALLED" || in_set "$pkg" "$DISABLED"; then echo "  skip    $pkg (already hidden)"; skipped=$((skipped+1)); continue; fi
+  # Google Play system modules: disabling one can stop the TV booting after a background update.
+  case "$(adb_s shell pm path "$pkg")" in *package:/apex/*)
+    echo "  skip    $pkg (Google Play system module, never hidden)"; skipped=$((skipped+1)); continue ;;
+  esac
   if [ $DRY = 1 ]; then echo "  would hide $pkg"; continue; fi
 
   # Prefer disable-user: the app and its data stay on the device, it just stops running and disappears.

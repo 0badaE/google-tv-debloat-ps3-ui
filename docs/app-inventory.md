@@ -26,11 +26,11 @@ This file is generated from [`packages.csv`](../packages.csv) by `docs/generate-
 
 | Package | Verdict | What it does |
 |---|---|---|
-| `com.google.android.adservices.api` | **BLOAT** | Privacy Sandbox ad services: ad topics and ad-conversion measurement |
-| `com.google.android.ext.adservices.api` | **BLOAT** | Second copy of Privacy Sandbox ad services (ExtServices module) |
-| `com.google.android.sdksandbox` | **BLOAT** | Sandbox that runs third-party ad SDKs for Privacy Sandbox |
-| `com.google.android.ondevicepersonalization.services` | **BLOAT** | On-device ad and content personalization |
-| `com.google.android.federatedcompute` | **BLOAT** | Federated learning: trains Google models on your usage and uploads the results |
+| `com.google.android.adservices.api` | **NEVER** | Privacy Sandbox ad services: ad topics and ad-conversion measurement (Google Play system module: hiding it can stop the TV booting after a system update) |
+| `com.google.android.ext.adservices.api` | **NEVER** | Second copy of Privacy Sandbox ad services (ExtServices module) (Google Play system module: hiding it can stop the TV booting after a system update) |
+| `com.google.android.sdksandbox` | **NEVER** | Sandbox that runs third-party ad SDKs for Privacy Sandbox (Google Play system module: hiding it can stop the TV booting after a system update) |
+| `com.google.android.ondevicepersonalization.services` | **NEVER** | On-device ad and content personalization (Google Play system module: hiding it can stop the TV booting after a system update) |
+| `com.google.android.federatedcompute` | **NEVER** | Federated learning: trains Google models on your usage and uploads the results (Google Play system module: hiding it can stop the TV booting after a system update) |
 | `com.google.android.tv.remotecontrol.logging` | **BLOAT** | Logs how you use the remote and sends it to Google |
 | `com.google.android.feedback` | **BLOAT** | Uploads 'Send feedback' and crash reports to Google |
 | `com.android.tv.feedbackconsent` | **BLOAT** | Consent prompt for sending feedback and bug reports |
@@ -50,8 +50,8 @@ This file is generated from [`packages.csv`](../packages.csv) by `docs/generate-
 
 | Package | Verdict | What it does |
 |---|---|---|
-| `com.google.android.healthconnect.controller` | **OPTIONAL** | Health Connect (fitness data hub for phones) |
-| `com.google.android.health.connect.backuprestore` | **OPTIONAL** | Health Connect backup |
+| `com.google.android.healthconnect.controller` | **NEVER** | Health Connect (fitness data hub for phones) (Google Play system module: hiding it can stop the TV booting after a system update) |
+| `com.google.android.health.connect.backuprestore` | **NEVER** | Health Connect backup (Google Play system module: hiding it can stop the TV booting after a system update) |
 | `com.google.android.devicelockcontroller` | **NEVER** | Device Lock for devices bought on credit (inert here; Android refuses to disable it) |
 | `com.android.dynsystem` | **OPTIONAL** | Dynamic System Updates (developers booting test images) |
 | `com.android.cameraextensions` | **OPTIONAL** | Camera extensions (the device has no camera) |

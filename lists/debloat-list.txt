@@ -2,11 +2,6 @@
 # Device: Google TV Streamer 4K (kirkwood), Android 14. Details for every package: docs/app-inventory.md
 
 # Ads, tracking and telemetry
-com.google.android.adservices.api
-com.google.android.ext.adservices.api
-com.google.android.sdksandbox
-com.google.android.ondevicepersonalization.services
-com.google.android.federatedcompute
 com.google.android.tv.remotecontrol.logging
 com.google.android.feedback
 com.android.tv.feedbackconsent
@@ -18,8 +13,6 @@ com.google.android.play.games
 com.google.android.videos
 
 # Not useful on a TV
-com.google.android.healthconnect.controller
-com.google.android.health.connect.backuprestore
 com.android.dynsystem
 com.android.cameraextensions
 com.android.mtp
@@ -35,3 +28,12 @@ com.google.android.backdrop
 # com.google.android.apps.tv.dreamx       # Ambient mode screensaver
 # com.google.android.marvin.talkback      # TalkBack
 # com.google.android.tts                  # Speech Services
+
+# Never hide: these are parts of Google Play system modules (they live under /apex/). A
+# background system update can stop the TV booting while they're disabled; that left this
+# Streamer stuck on the boot animation until a factory reset. debloat skips /apex/ packages
+# even if you add them back above.
+#   com.google.android.adservices.api, com.google.android.ext.adservices.api,
+#   com.google.android.sdksandbox, com.google.android.ondevicepersonalization.services,
+#   com.google.android.federatedcompute, com.google.android.healthconnect.controller,
+#   com.google.android.health.connect.backuprestore

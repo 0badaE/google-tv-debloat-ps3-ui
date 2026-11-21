@@ -28,6 +28,11 @@ $summary = @{ hidden = 0; skipped = 0; failed = 0 }
 foreach ($pkg in $packages) {
     if (-not $all[$pkg]) { Write-Host "  skip    $pkg (not on this device)"; $summary.skipped++; continue }
     if (-not $installed[$pkg] -or $disabled[$pkg]) { Write-Host "  skip    $pkg (already hidden)"; $summary.skipped++; continue }
+    # Google Play system modules: disabling one can stop the TV booting after a background update.
+    if (((Invoke-Adb shell pm path $pkg) -join ' ') -match 'package:/apex/') {
+        Write-Host "  skip    $pkg (Google Play system module, never hidden)" -ForegroundColor Yellow
+        $summary.skipped++; continue
+    }
     if ($DryRun) { Write-Host "  would hide $pkg"; continue }
 
     # Prefer disable-user: the app and its data stay on the device, it just stops running and disappears.

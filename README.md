@@ -81,13 +81,25 @@ Accessibility on the TV.
 
 ## What gets hidden
 
-The default list, [`lists/debloat-list.txt`](lists/debloat-list.txt), hides 22 packages:
+The default list, [`lists/debloat-list.txt`](lists/debloat-list.txt), hides 15 packages:
 
 | Group | Packages |
 |---|---|
-| **Ads and tracking** (10) | Privacy Sandbox ad services (`adservices.api`, `ext.adservices.api`, `sdksandbox`, `ondevicepersonalization`), federated learning (`federatedcompute`), remote-press logging (`tv.remotecontrol.logging`), feedback and crash uploads (`feedback`, `tv.feedbackconsent`), RLZ partner pings (`partnersetup`), Play Auto Install promos (`android.autoinstalls.config.google.sabrina`) |
+| **Ads and tracking** (5) | Remote-press logging (`tv.remotecontrol.logging`), feedback and crash uploads (`feedback`, `tv.feedbackconsent`), RLZ partner pings (`partnersetup`), Play Auto Install promos (`android.autoinstalls.config.google.sabrina`) |
 | **Unused Google apps** (2) | Play Games, Google TV / Play Movies store (`videos`) |
-| **Not useful on a TV** (10) | Health Connect (2), Dynamic System Updates, camera extensions, USB file transfer (MTP), Calendar sync, wallpaper picker, basic screensaver, HTML viewer, old Backdrop stub |
+| **Not useful on a TV** (8) | Dynamic System Updates, camera extensions, USB file transfer (MTP), Calendar sync, wallpaper picker, basic screensaver, HTML viewer, old Backdrop stub |
+
+**Never hidden: Google Play system modules.** Earlier versions also hid Privacy Sandbox
+(`adservices.api`, `ext.adservices.api`, `sdksandbox`, `ondevicepersonalization`), federated
+learning (`federatedcompute`) and Health Connect. Those live inside Google Play system modules
+(`/apex/`), which update in the background and take effect on the next reboot; with them disabled, a
+Streamer got stuck on the boot animation and needed a factory reset. `debloat` now skips any
+`/apex/` package, even if you add it to the list. If you ran an older version, turn them back on
+(they're no longer in the list, so name them):
+
+```powershell
+.\restore.ps1 -Device <ip:port> -Package com.google.android.adservices.api,com.google.android.ext.adservices.api,com.google.android.sdksandbox,com.google.android.ondevicepersonalization.services,com.google.android.federatedcompute,com.google.android.healthconnect.controller,com.google.android.health.connect.backuprestore
+```
 
 Deliberately **kept**, and commented out at the bottom of the list so you can opt in: voice search /
 Assistant (`katniss`), Chromecast built-in (`mediashell`), Ambient mode (`dreamx`), TalkBack and
