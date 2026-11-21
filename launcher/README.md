@@ -71,6 +71,7 @@ Settings shortcuts this TV can't open are left out automatically.
 | Left / Right | Change category |
 | Up / Down | Move through the column |
 | OK | Open |
+| Hold OK on an app | Open, App info, Uninstall (Uninstall only for apps you installed) |
 | Back | Close a panel, or jump to the top of the column |
 | Home | Crossbar |
 | Hold Home | Google TV's quick-settings panel |
@@ -198,7 +199,8 @@ Settings → Theme:
 When the TV plays music, from any app, the wallpaper comes alive. This works on the home screen and
 in the screensaver:
 
-- **The wave speeds up**, to roughly 2.5 to 3.5 times its resting speed, easing in so it never jerks.
+- **The wave speeds up**, to roughly 1.35 to 1.8 times its resting speed, easing in so it never jerks.
+  The reaction is kept gentle on purpose, so a loud song lifts the wave rather than strobing it.
 - **The glow breathes with the song.** It brightens in the loud parts and settles in the quiet ones.
 - **The sparkles grow** in number and brightness when the song builds, and fade in rather than pop.
 - When the music stops, everything eases back to rest over a couple of seconds.

@@ -232,9 +232,10 @@ final class WaveView extends GLSurfaceView implements GLSurfaceView.Renderer {
         // swell is -0.5 (quieter than the song around it) .. +0.5 (louder).
         float swell = dyn - 0.5f;
         waveTime += dt * speed;
-        float brightness = 1 + musicMix * (0.25f + 1.1f * swell);
-        float density = settings.count.v / MAX_PARTICLES + musicMix * (0.15f + 0.7f * swell);
-        float sparkle = Math.max(0.2f, 1 + musicMix * (0.4f + 2.0f * swell));
+        // Kept gentle so a loud song lifts the wave rather than strobing it.
+        float brightness = 1 + musicMix * (0.1f + 0.45f * swell);
+        float density = settings.count.v / MAX_PARTICLES + musicMix * (0.06f + 0.3f * swell);
+        float sparkle = 1 + musicMix * (0.2f + 0.9f * swell);
         float t = waveTime;
         float fade = currentFade(now);
         float[] g;
@@ -352,12 +353,12 @@ final class WaveView extends GLSurfaceView implements GLSurfaceView.Renderer {
         fast += (level - fast) * Math.min(1, dt * (level > fast ? 7f : 2.5f));
         slow += (level - slow) * Math.min(1, dt * 0.35f);
         float target = music && pulse.listening() ? clamp01(0.5f + (fast - slow) * 3f) : 0.5f;
-        dyn += (target - dyn) * Math.min(1, dt * 4f);
+        dyn += (target - dyn) * Math.min(1, dt * 3f);
         dynMin = Math.min(dynMin, dyn);
         dynMax = Math.max(dynMax, dyn);
-        // Speed eases separately so the flow never jerks.
-        float speedTarget = 1 + musicMix * (1.6f + 1.0f * dyn);
-        speed += (speedTarget - speed) * Math.min(1, dt * 1.2f);
+        // Speed eases separately so the flow never jerks: about 1.35x in quiet passages, 1.8x at peaks.
+        float speedTarget = 1 + musicMix * (0.35f + 0.45f * dyn);
+        speed += (speedTarget - speed) * Math.min(1, dt * 0.8f);
     }
 
     private static float clamp01(float v) {
