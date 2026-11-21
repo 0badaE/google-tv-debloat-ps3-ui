@@ -114,7 +114,7 @@ the TV simply behaves like plain Google TV.
 **Lamps and other Google Home devices.** While *any* accessibility service is running, Google's
 smart-home screens switch to an accessibility mode where OK only turns a light on or off, and
 Left/Right no longer change its brightness. So when you open Google's smart-home screen (from its
-panel), the helper steps aside; as soon as you leave Google's screens, Crossbar switches it back on
+panel), the helper steps aside; as soon as you leave that screen, Crossbar switches it back on
 (and if you pressed Home meanwhile, brings up Crossbar). Google's panel itself keeps the helper on,
 so Home goes straight back to Crossbar from there. It only re-enables a helper it paused itself, never one
 you turned off. This needs two extra permissions, below; without them the helper just stays on and

@@ -30,8 +30,6 @@ public final class KeyService extends AccessibilityService {
     private static final String STOCK_HOME = Catalog.LAUNCHER_X + ".home.HomeActivity";
     private static final String YOUTUBE = "com.google.android.youtube.tv";
     private static final String NETFLIX = "com.netflix.ninja";
-    /** Google's smart-home screens (lamps, plugs), opened from its panel. */
-    private static final String SMART_HOME = "com.google.android.libraries.tv.smarthome.";
     private static final long LONG_PRESS_MS = 500;
     /** Overlays that come and go on top of Google TV without the user leaving it. */
     private static final Set<String> OVERLAYS = new HashSet<>(Arrays.asList(
@@ -108,7 +106,7 @@ public final class KeyService extends AccessibilityService {
         if (pkg == null) return;
         // Only the smart-home screen needs the helper gone (see HelperPause). Pausing for the whole
         // panel instead left Home going to Google TV until the helper came back.
-        if (cls != null && cls.toString().startsWith(SMART_HOME)) {
+        if (cls != null && cls.toString().startsWith(HelperPause.SMART_HOME)) {
             HelperPause.pause(this);
             return;
         }

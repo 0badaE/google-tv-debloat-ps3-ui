@@ -15,17 +15,14 @@ import android.provider.Settings;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Steps the Home button helper aside while Google TV's smart-home screens are open.
  *
  * Any running accessibility service puts Google's smart-home controls into an accessibility mode
  * where Left/Right no longer change a lamp's brightness. So when a smart-home screen comes up, the
- * helper switches itself off; once you leave Google's screens, this switches it back on.
+ * helper switches itself off; once you leave the smart-home screen, this switches it back on.
  * It only re-enables what it paused, never a helper you turned off yourself.
  *
  * Needs WRITE_SECURE_SETTINGS (to switch the helper) and usage access (to see which screen is in
@@ -35,10 +32,8 @@ final class HelperPause {
     private static final String TAG = "Crossbar";
     private static final String PREF = "helper_paused";
     private static final long POLL_MS = 700;
-    /** Google screens to stay paused on: its panel, smart-home controls, and what floats over them. */
-    private static final Set<String> GOOGLE_SCREENS = new HashSet<>(Arrays.asList(
-            Catalog.LAUNCHER_X, "com.google.android.apps.tv.dreamx", "com.android.systemui",
-            "com.google.android.katniss", "com.google.android.inputmethod.latin"));
+    /** Google's smart-home screens (lamps, plugs): the only place the helper stays off. */
+    static final String SMART_HOME = "com.google.android.libraries.tv.smarthome.";
     private static final String STOCK_HOME = Catalog.LAUNCHER_X + ".home.HomeActivity";
 
     private static final Handler handler = new Handler(Looper.getMainLooper());
@@ -55,7 +50,7 @@ final class HelperPause {
                 == AppOpsManager.MODE_ALLOWED;
     }
 
-    /** Switches the helper off and watches for the user leaving Google's screens. */
+    /** Switches the helper off and watches for the user leaving the smart-home screen. */
     static void pause(Context context) {
         Context c = context.getApplicationContext();
         if (!available(c)) return;
@@ -91,17 +86,18 @@ final class HelperPause {
             @Override
             public void run() {
                 String[] fg = foreground(c);
-                boolean onGoogle = fg != null && GOOGLE_SCREENS.contains(fg[0]) && !STOCK_HOME.equals(fg[1]);
-                if (onGoogle) {
+                // Back on as soon as smart home is left, even for Google's panel: Home must keep
+                // reaching Crossbar from there.
+                if (fg != null && fg[1].startsWith(SMART_HOME)) {
                     handler.postDelayed(this, POLL_MS);
                 } else {
-                    // Left Google's screens. If that was a Home press, the helper sends it to
-                    // Crossbar as soon as it's back on (KeyService.onServiceConnected).
+                    // If that was a Home press, the helper sends it to Crossbar as soon as it's
+                    // back on (KeyService.onServiceConnected).
                     resume(c);
                 }
             }
         };
-        // Give Google's panel a moment to come to the front before the first check.
+        // Give the smart-home screen a moment to settle in front before the first check.
         handler.postDelayed(watcher, 1500);
     }
 
