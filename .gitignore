@@ -8,9 +8,8 @@ backups/
 launcher/build/
 launcher/signing/
 
-# frameXTV app build output and local signing key
-framex/build/
-framex/signing/
+# frameXTV is kept out of this repository (local branch only)
+framex/
 
 # Third-party projects cloned for study
 reference/
